@@ -4,7 +4,7 @@ var request = require('request');
 var cheerio = require('cheerio');
 
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('homepage');
 });
 
 router.get('/data', function(req, res, next) {
@@ -16,9 +16,9 @@ router.get('/data', function(req, res, next) {
         var links = $('body').find('a');
         for (var i = 1; i < links.length; i++){
           link = links[i]["attribs"]["href"]
-          if (/^http:\/\/github.com\//.test(link)) {
+          if (/^http(s|):\/\/(github.com|git.io)\//.test(link)) {
             github = link
-          } else if (/^https:\/\/twitter.com\//.test(link)) {
+          } else if (/^http(s|):\/\/twitter.com\//.test(link)) {
             twitter = link
           }
         }
